@@ -52,11 +52,11 @@ func StartServer() {
 		negroni.Wrap(http.HandlerFunc(SecuredPingHandler)),
 	))
 
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./dist/"+os.Getenv("CLIENT_DIR"))))
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./dist/prod")))
 
 	http.Handle("/", r)
 	http.ListenAndServe(":"+port, nil)
-  log.Println("finished backend..")
+	log.Println("finished backend..")
 }
 
 type Response struct {
