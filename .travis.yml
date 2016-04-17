@@ -16,12 +16,18 @@ install:
 
 before_script:
   - sh -e /etc/init.d/xvfb start
-  - nohup bash -c webdriver-manager start 2>&1 &  # Protractor CI
+  - npm run webdriver-update
+  - nohup npm run webdriver-start 2>&1 &
   - sleep 1  # give server time to start
 
 script:
   - npm test
-  - go test -v ./...
+  - go test -v -cover ./src/backend/omni-tempore/...
+  - npm run build.prod
+  - go install ./...
+  - PORT=5555 omni-tempore-backend &
+  - sleep 2 # give server time to start
+  - npm run e2e
 
 
 after_failure:
