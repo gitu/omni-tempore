@@ -1,19 +1,25 @@
-language: node_js
-node_js:
+language: go
+go:
   - stable
 
 sudo: false
 
 before_install:
-  #- nvm install 4.2
-  #- nvm use 4.2
+  - nvm install stable
+  - nvm use stable
   - export CHROME_BIN=chromium-browser  # Karma CI
   - export DISPLAY=:99.0
+
+#install:
+# - npm install
+# -
 
 before_script:
   - sh -e /etc/init.d/xvfb start
   # - nohup bash -c webdriver-manager start 2>&1 &  # Protractor CI
   - sleep 1  # give server time to start
+
+# npm test
 
 after_failure:
   - cat /home/travis/build/mgechev/angular2-seed/npm-debug.log
