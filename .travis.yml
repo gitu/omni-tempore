@@ -1,6 +1,6 @@
 language: go
 go:
-  - stable
+  - 1.6
 
 sudo: false
 
@@ -10,23 +10,26 @@ before_install:
   - export CHROME_BIN=chromium-browser  # Karma CI
   - export DISPLAY=:99.0
 
-#install:
-# - npm install
-# -
+install:
+ - npm install
+ - go get -t -v ./...
 
 before_script:
   - sh -e /etc/init.d/xvfb start
-  # - nohup bash -c webdriver-manager start 2>&1 &  # Protractor CI
+  - nohup bash -c webdriver-manager start 2>&1 &  # Protractor CI
   - sleep 1  # give server time to start
 
-# npm test
+script:
+  - npm test
+  - go test -v ./...
+
 
 after_failure:
   - cat /home/travis/build/mgechev/angular2-seed/npm-debug.log
 
-branches:
-  only: master
-
+#branches:
+#  only: master
+#
 notifications:
   email: true
 
