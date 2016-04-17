@@ -30,7 +30,7 @@
     "test": "gulp test --color",
     "webdriver-start": "webdriver-manager start",
     "webdriver-update": "webdriver-manager update",
-    "heroku-postinstall": "gulp build.prod --color"
+    "heroku-postbuild": "gulp build.prod --color"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
