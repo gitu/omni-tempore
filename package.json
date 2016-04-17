@@ -1,9 +1,9 @@
 {
-  "name": "angular2-seed",
+  "name": "omni-tempore",
   "version": "0.0.0",
   "description": "Seed for Angular 2 apps",
   "repository": {
-    "url": "https://github.com/mgechev/angular2-seed"
+    "url": "https://github.com/gitu/omni-tempore"
   },
   "scripts": {
     "build.dev": "gulp build.dev --color",
@@ -30,10 +30,12 @@
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
     "webdriver-start": "webdriver-manager start",
-    "webdriver-update": "webdriver-manager update"
+    "webdriver-update": "webdriver-manager update",
+    "heroku-postbuild": "gulp build.prod --color",
+    "start.backend": "go run src/backend/omni-tempore-backend/main.go"
   },
-  "author": "Minko Gechev <mgechev>",
-  "license": "MIT",
+  "author": "Florian Schrag",
+  "license": "AGPLv3",
   "devDependencies": {
     "angular2-service-worker": "^0.1.1",
     "async": "^1.4.2",
