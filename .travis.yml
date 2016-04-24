@@ -1,50 +1,40 @@
 language: go
 go:
-  - 1.6
-
+- 1.6
 sudo: false
-
+addons:
+  sauce_connect: true
 before_install:
-  - nvm install stable
-  - nvm use stable
-  - export CHROME_BIN=chromium-browser  # Karma CI
-  - export DISPLAY=:99.0
-
+- nvm install stable
+- nvm use stable
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
 install:
- - npm install
- - go get -t -v ./...
-
+- npm install
+- go get -t -v ./...
 before_script:
-  - sh -e /etc/init.d/xvfb start
-  - npm run webdriver-update
-  - nohup npm run webdriver-start 2>&1 &
-  #- sleep 1  # give server time to start
-
+- sh -e /etc/init.d/xvfb start
+- npm run webdriver-update
+- nohup npm run webdriver-start 2>&1 &
 script:
-  - go test -v -cover ./src/backend/omni-tempore-backend/...
-  - npm test
-  - npm run build.prod
-  - go install ./...
-  ## start backend
-  - nohup npm run start.backend > start.backend.out 2>&1 &
-  - nohup npm run serve.e2e > serve.e2e.out 2>&1 &
-  - sleep 15 # give server time to start
-  - npm run e2e
-
-
+- go test -v -cover ./src/backend/omni-tempore-backend/...
+- npm test
+- npm run build.prod
+- go install ./...
+- nohup npm run serve.e2e > serve.e2e.out 2>&1 &
+- nohup npm run start.backend > start.backend.out 2>&1 &
+- sleep 15
+- npm run e2e
 after_failure:
-  - cat serve.e2e.out
-  - cat start.backend.out
-  - cat npm-debug.log
-
+- cat serve.e2e.out
+- cat start.backend.out
+- cat npm-debug.log
 notifications:
   email: true
-
 env:
   global:
-    # https://github.com/DefinitelyTyped/tsd#tsdrc
-    # Token has no scope (read-only access to public information)
-    - TSD_GITHUB_TOKEN=19937e314622fdaf0f26aa9b6738de2642b7a6f9
-
+  - TSD_GITHUB_TOKEN=19937e314622fdaf0f26aa9b6738de2642b7a6f9
+  - secure: x2VzCmW81rArwZL7C7OTkqEuRP+ispYcOtI9eBCV0A0kRp1DPn9TpB5EzxOdXjCmyFojdH4DBDanOrNRXG2BT+IBfZSkORo7Twj0RbG17NCoxGm2iYg58KKAqdo192f8Sswn1bvHAa0VTNUgXTDN6bQjnMx/lkjNlQiNjPGu7nVXhUnw9euV+OcMxrN04br5UYglCj85xAyO6WqYHBJlhL7qIdeVLL7FgoK7+4lFrqfdgECPQZAUTA6QU+q9n0niBumaGzBGPkQXtrqgS+kUrcidMPP8XzYqPWb04r+awYVC1463PVFZu+ecsF5MfUw3ing3fySpgtGHBm/Mdh24OSpGWO7iq2DqXnZpzYUytPrYxWV78HEru78Mt3eS7yudH1KlkUSPuPs7aFNsQ6idvMfPYLnzKARSZpMChB4bShy8s3Cjl03tpR3kb3R14kg5ylzRcawFwGG23v6pUiItYZyZ5EmY+GpK9NtSr8a08gghhswHqeE/SkbDfjZGiLcACznx4O3Bx9olGxt9knPqe0bLV5UXHZ3mIEnKsTKPQWABlBuD0QiS7c39lZ2UutQPBoXfPIlCxgm7uuEy+I7ogfyJ16rQASZ1ePBC0MDJWEbi/RYkx3JAK2v0Mr4sdARv8WXZ+MmoSrnDwsOEA72q8+LVZH8j5IuJ6wqLOiFTOgo=
+  - secure: TOsUyQjucgtG+/4jojKqWoG0XIaxKQOld0NlEXugJZep6QVPocd5djDZn3K+acYNfCq8oY/ebyp8khgmuzsXXw6fibDG/iEtgZxLKuiyPhlT5dIUojirGVaNOcFByvaXtS17e4VryTPE8bi0Yoq0cJDixPofIUcWqALC84M9V8quFhM3xDwy+ljOU5bexWfL8s8wd5HlFwD/fnM7LERB7EhCOd3wZQKfDeKVTCOFWD+18Z2MbXLrCNmRtQFP1VnvN9O7CQitJVvs9ReH8IrFyrIOZtp1QHa08Q81AD0jdLnLQDzpPNS5uUZ/eA2VP89GKL2zQqr6rfOi5nMTDUKTRLhvcHqZkaoNxr0MwTyYL5V8CmGemFNC8+9CjXj3mP5ycPKkmn0AzcHOLb2QCboVoEvfSi86EcpBE0I9BiLbDYKiTOUrFHrQF/F21jmN62RXYi5ugn2HcVw/R/8BwEBJ72eWc1bR6pxRvrV8Uo+16HVC09vhZgHe9Z15ocI4K/HjHGvY8+8SqJhBhjOsfla8NFlXOnV1CqFoaVYmzJG/oOjt+Su6kCZGVRe7LJ2VkO5QtvFN708nuMI/neLLlkHHwOr3x7MAUsttnKsnJ3uxjXRrmqCkcYi6CiqLXpwoSStwFrRv1YWCgm2cfBLY9HgwLvqItKhmxxJmNxlSk5zK1kQ=
 cache:
   directories: node_modules
