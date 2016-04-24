@@ -7,10 +7,13 @@ addons:
 before_install:
 - nvm install stable
 - nvm use stable
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
 install:
 - npm install
 - go get -t -v ./...
 before_script:
+- sh -e /etc/init.d/xvfb start
 - npm run webdriver-update
 - nohup npm run webdriver-start 2>&1 &
 script:
