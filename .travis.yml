@@ -18,24 +18,23 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - npm run webdriver-update
   - nohup npm run webdriver-start 2>&1 &
-  - sleep 1  # give server time to start
+  #- sleep 1  # give server time to start
 
 script:
-  - npm test
   - go test -v -cover ./src/backend/omni-tempore/...
+  - npm test
   - npm run build.prod
   - go install ./...
-  - PORT=5555 omni-tempore-backend &
-  - sleep 2 # give server time to start
+  ## start backend
+  - nohup npm start.backend 2>&1 &
+  - nohup npm serve.e2e 2>&1 &
+  - sleep 3 # give server time to start
   - npm run e2e
 
 
 after_failure:
   - cat /home/travis/build/mgechev/angular2-seed/npm-debug.log
 
-#branches:
-#  only: master
-#
 notifications:
   email: true
 

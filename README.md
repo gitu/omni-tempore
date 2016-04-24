@@ -1,4 +1,13 @@
-# Introduction
+[![Build Status](https://travis-ci.org/gitu/omni-tempore.svg?branch=master)](https://travis-ci.org/gitu/omni-tempore)
+[![Code Climate](https://codeclimate.com/github/gitu/omni-tempore/badges/gpa.svg)](https://codeclimate.com/github/gitu/omni-tempore)
+[![Join the chat at https://gitter.im/gitu/omni-tempore](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gitu/omni-tempore?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Dependency Status](https://david-dm.org/gitu/omni-tempore.svg)](https://david-dm.org/gitu/omni-tempore)
+[![devDependency Status](https://david-dm.org/gitu/omni-tempore/dev-status.svg)](https://david-dm.org/gitu/omni-tempore#info=devDependencies)
+
+[![Throughput Graph](https://graphs.waffle.io/gitu/omni-tempore/throughput.svg)](https://waffle.io/gitu/omni-tempore/metrics)
+
+
+#Introduction
 
 [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://github.com/mgechev/angular2-style-guide)
 [![Build Status](https://travis-ci.org/mgechev/angular2-seed.svg?branch=master)](https://travis-ci.org/mgechev/angular2-seed)
