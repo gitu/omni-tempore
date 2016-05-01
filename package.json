@@ -14,7 +14,7 @@
     "build.test": "gulp build.test --color",
     "build.test.watch": "gulp build.test.watch --color",
     "generate.manifest": "gulp generate.manifest --color",
-    "e2e": "protractor",
+    "e2e": "protractor --troubleshoot",
     "e2e.live": "protractor --elementExplorer",
     "gulp": "gulp",
     "karma": "karma",
