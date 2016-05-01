@@ -28,7 +28,7 @@ script:
 after_failure:
 - cat serve.e2e.out
 - cat start.backend.out
-- cat webdriver-start
+- cat webdriver-start.out
 - cat npm-debug.log
 notifications:
   email: true
