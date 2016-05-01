@@ -2,8 +2,8 @@ language: go
 go:
 - 1.6
 sudo: false
-addons:
-  sauce_connect: true
+#addons:
+#  sauce_connect: true
 before_install:
 - nvm install stable
 - nvm use stable
@@ -15,7 +15,7 @@ install:
 before_script:
 - sh -e /etc/init.d/xvfb start
 - npm run webdriver-update
-#- nohup npm run webdriver-start > webdriver-start.out 2>&1 &
+- nohup npm run webdriver-start > webdriver-start.out 2>&1 &
 script:
 - go test -v -cover ./src/backend/omni-tempore-backend/...
 - npm test
