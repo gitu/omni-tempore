@@ -15,7 +15,7 @@ install:
 before_script:
 - sh -e /etc/init.d/xvfb start
 - npm run webdriver-update
-- nohup npm run webdriver-start 2>&1 &
+- nohup npm run webdriver-start > webdriver-start.out 2>&1 &
 script:
 - go test -v -cover ./src/backend/omni-tempore-backend/...
 - npm test
@@ -28,6 +28,7 @@ script:
 after_failure:
 - cat serve.e2e.out
 - cat start.backend.out
+- cat webdriver-start
 - cat npm-debug.log
 notifications:
   email: true
