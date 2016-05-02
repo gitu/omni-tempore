@@ -31,6 +31,13 @@ exports.config = {
     browser.ignoreSynchronization = false;
   },
 
+  customLaunchers: {
+    Chrome_travis_ci: {
+      base: 'Chrome',
+      flags: ['--no-sandbox']
+    }
+  },
+
 
   /**
    * Angular 2 configuration
@@ -44,6 +51,7 @@ exports.config = {
 
 
 if (process.env.TRAVIS) {
+  exports.config.browsers = ['Chrome_travis_ci'];
   exports.config.sauceUser = process.env.SAUCE_USERNAME;
   exports.config.sauceKey = process.env.SAUCE_ACCESS_KEY;
   exports.config.capabilities = {
