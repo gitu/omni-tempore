@@ -35,7 +35,7 @@ export class SeedConfig {
   DEV_DEST             = `${this.DIST_DIR}/dev`;
   PROD_DEST            = `${this.DIST_DIR}/prod`;
   TMP_DIR              = `${this.DIST_DIR}/tmp`;
-  APP_DEST             = `${this.DIST_DIR}/${this.ENV}`;
+  APP_DEST             = this.ENV === ENVIRONMENTS.DEVELOPMENT ? this.DEV_DEST : this.PROD_DEST;
   CSS_DEST             = `${this.APP_DEST}/css`;
   JS_DEST              = `${this.APP_DEST}/js`;
   VERSION              = appVersion();
@@ -66,6 +66,12 @@ export class SeedConfig {
     { src: `${this.CSS_SRC}/main.css`, inject: true, vendor: false }
   ];
 
+  // Editor temporary files to ignore in watcher and asset builder.
+  TEMP_FILES: string[] = [
+    '**/*___jb_tmp___',
+    '**/*~',
+  ];
+
   get DEPENDENCIES(): InjectableDependency[] {
     return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.ENV)))
       .concat(this.APP_ASSETS.filter(filterDependency.bind(null, this.ENV)));
@@ -76,7 +82,10 @@ export class SeedConfig {
   // SystemsJS Configuration.
   protected SYSTEM_CONFIG_DEV = {
     defaultJSExtensions: true,
-    packageConfigPaths: [`${this.APP_BASE}node_modules/*/package.json`],
+    packageConfigPaths: [
+      `${this.APP_BASE}node_modules/*/package.json`,
+      `${this.APP_BASE}node_modules/**/package.json`
+    ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       'angular2/*': `${this.APP_BASE}angular2/*`,
